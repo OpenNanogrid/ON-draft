@@ -8,7 +8,6 @@ Here's a 5 min introduction video I made for the Shuttleworth Foundation: https:
 TODO: draft this out into a proper essay.
 
 - Any voltage over about 60VDC is not safe to the touch
-
 - It is expensive to generate a true sine wave alternating current out of low voltage DC from renewable energies
 - Solar panels output low voltage DC
 - TEG (thermo electric generators) output low voltage DC
@@ -28,6 +27,7 @@ Difficulties and negative points about a low voltage DC grid:
 - Grid size is smaller with a lower voltage or:
 - available Power is lower at the same AWG / cable dimensions
 - special connectors have to be chosen
+- It is inefficient for large consumers
 
 
 Best of both worlds: A hybrid 230 VAC + 48VDC infrastructure; 230VAC for high power appliances like heavy machinery, ovens, 48VDC for any low power consumer electronics and efficient lighting.
