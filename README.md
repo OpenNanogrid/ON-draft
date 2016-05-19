@@ -5,7 +5,7 @@ Most small devices use low voltage DC. Let's create a DC grid that can feed on r
 
 Here's a 5 min introduction video I made for the Shuttleworth Foundation: https://www.youtube.com/watch?v=FQdyD6pwzek
 
-TODO: draft this out into a proper essay.
+This is a random stream of thoughts, feel free to add yours too!
 
 - Any voltage over about 60VDC is not safe to the touch
 - It is expensive to generate a true sine wave alternating current out of low voltage DC from renewable energies
@@ -114,6 +114,7 @@ Suggestions for sockets and plugs:
 - Open Source screw terminals with M6 screws. 3D printed or milled.
 - RC battery plugs (bad UX, don't hold up long)
 - USB3 type C (need active electronics)
+- Outdoor interconnections: Wieland DMX IP RST20i3S 50V/20A
 
 Any other recommendations?
 
