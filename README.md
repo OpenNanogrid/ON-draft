@@ -114,7 +114,8 @@ Suggestions for sockets and plugs:
 - Open Source screw terminals with M6 screws. 3D printed or milled.
 - RC battery plugs (bad UX, don't hold up long)
 - USB3 type C (need active electronics)
-- Outdoor interconnections: Wieland DMX IP RST20i3S 50V/20A
+- Outdoor interconnections: Wieland DMX IP RST20i3S 50V/20A (expensive at $10)
+- Anderson PowerPole for batteries and large interconnections
 
 Any other recommendations?
 
