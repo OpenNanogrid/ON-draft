@@ -9,59 +9,69 @@ Here's a 5 min introduction video I made for the Shuttleworth Foundation: https:
 
 This is a random stream of thoughts, feel free to add yours too!
 
-- Any voltage over about 60VDC is not safe to the touch
+- Any voltage over 50 VAC or 120 VDC is not safe to the touch
 - It is expensive to generate a true sine wave alternating current out of low voltage DC from renewable energies
 - Solar panels output low voltage DC
 - TEG (thermo electric generators) output low voltage DC
 - Small permanent magnet alternators used in a generator at a wind turbine or a water turbine usually operate at below 100V
 
 
-Only a few systems really do need the high voltage AC of 230V or 110V.
+Only a few systems really do need the high voltage AC of 230V or 110V, like electric ovens and heaters.
 
-- Desktop Computers (although terribly inefficient compared to laptops and smartphones) do need 12 VDC, 5 VDC and 3,3 VDC.
 - Laptops need about 12-20 VDC
-- TFT Flatscreens run on DC, especially if they have an LED backlight.
+- Flat screens run on DC, especially if they have an LED backlight.
 - Mobile phones, smartphones, tablet PCs etc are all charged and run with 5VDC
 - LEDs have a low forward voltage of less than 5V. However, there are also COB LEDs with lots of emitters in series.
+- Desktop Computers (although inefficient compared to laptops and smartphones) do need 12 VDC, some also 5 VDC and 3,3 VDC.
 
 Difficulties and negative points about a low voltage DC grid:
 
 - Grid size is smaller with a lower voltage or:
-- available Power is lower at the same AWG / cable dimensions
-- special connectors have to be chosen
+- available Power is lower at the same AWG / cable dimensions, as the Joule effect will heat up cables faster with a lower voltage.
+- special connectors have to be chosen, there is no good standard
 - It is inefficient for large consumers
 
 
-Best of both worlds: A hybrid 230 VAC + 48VDC infrastructure; 230VAC for high power appliances like heavy machinery, ovens, 48VDC for any low power consumer electronics and efficient lighting.
-
-Household circuit breakers may be re-used for a DC grid, but some have different characteristics for DC.
+Best of both worlds: A hybrid 230 VAC + Extra Low Voltage (ELV) DC infrastructure; 230VAC for high power appliances like heavy machinery, ovens, ELV DC for any low power consumer electronics, efficient lighting, small scale renewable energy sourcing and experiments.
 
 ## Voltage
+
+Maybe a multi phase system?
 
 - N: 0V, GND
 - L1: nominal 12VDC, (10-15VDC ?)
 - L2: nominal 48VDC, (24-52VDC ?)
 
+For increased efficiency with high loads and long cables I suggest an alternative with 84 V. 100V MOSFETs are commonly available. Low side switching is
+
+- L: 84 V (common, always connected, equals 20 LiPo cells in series)
+- N: 0 V  (low side, switched)
+
+84 VDC is plug and play compatible with some traditional AC SMPS. However, no integrated DC-DC converter solutions are available for such high voltages and decent current ratings. External MOSFET and additional parts -> more PCB space, higher cost.
 
 A cheap NYM-J 2x2.5mm² (1 Phase) or 4x2.5mm² (2 Phase) cabling may be used for low power branches of the grid, mobile installations don't require heavy insulation. Loudspeaker cables can be sufficient.
 
-Power buffering with batteries; for L2 with a nominal voltage of 3x12V = 36V: equals three lead acid batteries connected in series. If fully charged, grid voltage at the source would be 3x14V = 42V, at empty batteries about 32V. That is not cool, the voltage should be sanitized.
+Power buffering with batteries;
 
-The L2 grid voltage (only the voltage!) may be compatible with PoE, Power over Ethernet 802.3af (802.3at Type 1) and 802.3at Type 2.
+Example 1: A nominal voltage of 3x12V = 36V equals three lead acid batteries connected in series. If fully charged, grid voltage at the source would be 3x14V = 42V, at empty batteries about 32V. The voltage level can be sanitized with a SEPIC inverter.
 
-At 36V and 63A, there are 2268W available in the grid, if we assume proper cables and connectors. It depends on the application, but I would have switched over to 230 VAC already at this power rating.
+Example 2: A voltage of 48V could consist of 12 LiPo cells in series. 50.4V when fully charged, 40V when empty.
 
-One could make the 12V phase on/off grid redundant with one efficient (ie. ATX) power supply and an active diode (instead of two Schottky diodes). It is much easier to switch DC synchronous vs AC synchronous, because one does not have to establish a phase lock to get the waveform in sync.
+An 48V grid voltage (only the voltage level!) may be compatible with PoE, Power over Ethernet 802.3af (802.3at Type 1) and 802.3at Type 2. There are passive PoE systems that use 12..48VDC.
+
+At 36V and 63A, there are 2268W available, if we assume proper cables and connectors. It depends on the application, but I would have switched over to 230 VAC already at this power rating.
+
+One could make a 12V phase on/off grid redundant with one efficient (e.g. ATX gold) power supply and an active diode (instead of two Schottky diodes). It is much easier to switch DC synchronous vs AC synchronous, because one does not have to establish a phase lock to get the waveform in sync.
 
 ## Smart Grid
 
 The start would be to equip an energy monitoring system, like Open Energy Monitor (OEM). Communication could take place via
-- Wireless connections (even to non-grid-tied appliances. NRF24L01+, RFM12, BT,..)
+- Wireless connections (even to non-grid-tied appliances. NRF24L01+, RFM12, ESP8266, BT,..)
 - Wired LAN connection (power hungry, expensive and uses additional cabling)
-- PLC (Powerline Communication) with an Open Source protocol and hardware design. 
+- PLC (Powerline Communication) with an Open Source protocol and hardware design.
 
 Research: What about RS485 between two phases, would that be possible? Is a choke / low-pass needed at the low impedance energy sources and appliances? What frequency is used best for transmitting data via a modulated power line? Coupling via passive RC-highpass?
-There might be an integrated circuit for low voltage DC PLC communication.
+There might be an integrated circuit for low voltage DC PLC communication (I didn't find one).
 
 ### Intelligence, active electronics
 
