@@ -3,6 +3,8 @@ Drafting an open standard for an extra low voltage DC electricity grid.
 
 Most small devices use low voltage DC. Let's create a DC grid that can feed on renewable energies (RE), doesn't need to be tied to the AC grid and is safe to develop with according to Separated Extra Low Voltage (SELV) standards. This is not about another war on currents, AC has it's place for large appliances and the present infrastructure is a well tuned system that was built over 100 years. It's also not about a micro grid where a whole neighbourhood is connected with AC. The Open Nanogrid is focussed on sourcing and consuming energy on a smaller level, from your roof into your living room, from the river into your hackspace, from SunZilla into your Fablab's CNC mill - all with a safe voltage for short distances.
 
+![AC vs DC Facts]({{site.baseurl}}//img/Open-Nanogrid-Layout.png)
+
 Here's a 5 min introduction video I made for the Shuttleworth Foundation: https://www.youtube.com/watch?v=FQdyD6pwzek
 
 This is a random stream of thoughts, feel free to add yours too!
