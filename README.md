@@ -117,12 +117,14 @@ Suggestions for sockets and plugs:
 - large open screw terminals for high current use cases (which is somewhat legal, because the LVDC grid is safe to the touch )
 - PowerCon sockets (expensive, proprietary, e.g. by Neutrik. How many poles?)
 - SpeakOn sockets (moderately expensive, well suited because they carry 4 poles and are aimed for moderately high currents)
-- XLR sockets (cheap, but can't carry much current. Great for small appliances like phone chargers)
-- Open Source screw terminals with M6 screws. 3D printed or milled.
-- RC battery plugs (bad UX, don't hold up long)
-- USB3 type C (need active electronics)
-- Outdoor interconnections: Wieland DMX IP RST20i3S 50V/20A (expensive at $10)
+- XLR sockets (rather inexpensive, great for small appliances like phone chargers, laptops, screens, up to 16A per pin)
+- Custom Open Source snap/screw terminals with M6 screws, 3D printed/milled/turned.
+- RC battery plugs (bad UX, not made for many mating cycles, best suited for more permanent installation)
+- USB3 type C (needs active electronics for higher power levels, only 5A x 20V = 100W)
+- Wieland DMX IP RST20i3S 50V/20A (for outdoor interconnections, expensive at $10)
 - Anderson PowerPole for batteries and large interconnections
+
+- A new, open source connector? Check https://github.com/OpenNanogrid/ON-socket for more ideas.
 
 Any other recommendations?
 
