@@ -42,26 +42,21 @@ Maybe a multi phase system?
 - L1: nominal 12VDC, (10-15VDC ?)
 - L2: nominal 48VDC, (24-52VDC ?)
 
-For increased efficiency with high loads and long cables I suggest an alternative with 84 V. 100V MOSFETs are commonly available. Low side switching is
+For increased efficiency with high loads and long cables a higher voltage would be better. 100V MOSFETs are commonly available, so a 84V (equals 20 LiPo cells in series) could be a better alternative.
 
-- L: 84 V (common, always connected, equals 20 LiPo cells in series)
-- N: 0 V  (low side, switched)
+84 VDC is plug and play compatible with some traditional AC SMPS (Switch Mode Power Supplies). However, no integrated DC-DC converter solutions are available for such high voltages and decent current ratings. External MOSFET and additional parts are needed -> more PCB space, part count, higher cost.
 
-84 VDC is plug and play compatible with some traditional AC SMPS. However, no integrated DC-DC converter solutions are available for such high voltages and decent current ratings. External MOSFET and additional parts -> more PCB space, higher cost.
-
-A cheap NYM-J 2x2.5mm² (1 Phase) or 4x2.5mm² (2 Phase) cabling may be used for low power branches of the grid, mobile installations don't require heavy insulation. Loudspeaker cables can be sufficient.
+Cheap 2x2.5-10mm² (1 Phase) or 4x2.5-10mm² (2 Phase) cabling may be used for branches of the grid, no heavy or double insulation is needed. Loudspeaker cables can be sufficient. The voltage drop in the wires (Joule effect heating up the cable) should be less  than 10%.
 
 Power buffering with batteries;
 
-Example 1: A nominal voltage of 3x12V = 36V equals three lead acid batteries connected in series. If fully charged, grid voltage at the source would be 3x14V = 42V, at empty batteries about 32V. The voltage level can be sanitized with a SEPIC inverter.
+Example 1: A nominal voltage of 3x12V = 36V equals three lead acid batteries connected in series. If fully charged, grid voltage at the source would be 3x14V = 42V, at empty batteries about 32V. The voltage level can be sanitized with a SEPIC converter.
 
-Example 2: A voltage of 48V could consist of 12 LiPo cells in series. 50.4V when fully charged, 40V when empty.
+Example 2: A voltage of 48V could consist of 12 LiPo cells in series. 50.4V when fully charged, 40V when empty. A DC/DC step-up converter could keep the voltage steady at 50V at all times and shut down when the SOC (state of charge) of the batteries is too low.
 
-An 48V grid voltage (only the voltage level!) may be compatible with PoE, Power over Ethernet 802.3af (802.3at Type 1) and 802.3at Type 2. There are passive PoE systems that use 12..48VDC.
+An 48V grid voltage may be compatible with PoE, Power over Ethernet 802.3af (802.3at Type 1) and 802.3at Type 2. There are passive PoE systems that use 12..48VDC. Many network devices (switches, phones, access points, routers, cameras)  are powered via PoE.
 
-At 36V and 63A, there are 2268W available, if we assume proper cables and connectors. It depends on the application, but I would have switched over to 230 VAC already at this power rating.
-
-One could make a 12V phase on/off grid redundant with one efficient (e.g. ATX gold) power supply and an active diode (instead of two Schottky diodes). It is much easier to switch DC synchronous vs AC synchronous, because one does not have to establish a phase lock to get the waveform in sync.
+A nanogrid could be on/off grid redundant with one efficient (ATX gold?) power supply and an active diode (instead of two Schottky diodes). It is easier and more efficient to switch DC synchronous vs AC synchronous, because one does not have to establish a phase lock to get the waveforms in sync and cheaper low voltage MOSFETs can be used.
 
 ## Smart Grid
 
@@ -98,7 +93,7 @@ Voltage sensing should be through passive voltage dividers with appropriate head
 
 Current sensing should not be shunt based for high powers, but rather with a hall effect sensor or inductive. At DC, inductive sensing is not possible I guess, so we have to stick to hall sensors. MOSFET Rds parameters yield a Vds that can be sampled with a high gain differential amplifier.
 
-The integrated current sensor packages from Allegro are quite expensive. The following will be suitable for a 200A grid.
+The integrated current sensor packages from Allegro are quite expensive. The following will be suitable for a 200A branch.
 Bidirectional integrated hall effect current sensor:
 ACS759	±50A to 200A
 ACS756	±50A to 100A
@@ -110,9 +105,9 @@ Small OLED display for easy overview at the controller, showing the momentary po
 If the infrastructure is build from scratch and completely new, then it's best to start with a hybrid AC/DC (Alternating Current / Direct Current, not the famous rockband) grid: 
 
 cabling:
-- open or closed ring topology with branches, e.g. 3p AC household EIS: 1 x NYM-J 5G2.5, laid in parallel with 1x NYM-J 4x6 (up to 4x10)
+- open or closed ring topology with branches, e.g. 3p AC household EIS: 1 x NYM-J 5G2.5, laid in parallel with 4x6..16 for ELVDC.
 
-Important: How to determine the cables other than by their inner topology? LVDC cables should be marked differently.
+Important: How to distinguish the cables other than by their inner topology? ELVDC cables should be marked differently.
 
 
 ### Connectors, Sockets, Plugs, Terminals
@@ -122,12 +117,14 @@ Suggestions for sockets and plugs:
 - large open screw terminals for high current use cases (which is somewhat legal, because the LVDC grid is safe to the touch )
 - PowerCon sockets (expensive, proprietary, e.g. by Neutrik. How many poles?)
 - SpeakOn sockets (moderately expensive, well suited because they carry 4 poles and are aimed for moderately high currents)
-- XLR sockets (cheap, but can't carry much current. Great for small appliances like phone chargers)
-- Open Source screw terminals with M6 screws. 3D printed or milled.
-- RC battery plugs (bad UX, don't hold up long)
-- USB3 type C (need active electronics)
-- Outdoor interconnections: Wieland DMX IP RST20i3S 50V/20A (expensive at $10)
+- XLR sockets (rather inexpensive, great for small appliances like phone chargers, laptops, screens, up to 16A per pin)
+- Custom Open Source snap/screw terminals with M6 screws, 3D printed/milled/turned.
+- RC battery plugs (bad UX, not made for many mating cycles, best suited for more permanent installation)
+- USB3 type C (needs active electronics for higher power levels, only 5A x 20V = 100W)
+- Wieland DMX IP RST20i3S 50V/20A (for outdoor interconnections, expensive at $10)
 - Anderson PowerPole for batteries and large interconnections
+
+- A new, open source connector? Check https://github.com/OpenNanogrid/ON-socket for more ideas.
 
 Any other recommendations?
 
